@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 
 class User extends Authenticatable
 {
@@ -28,25 +29,20 @@ class User extends Authenticatable
     ];
     public function roleName()
     {
-      return $this->belongsTo('\App\UserRole', 'role_id' ,'role_id');
+        return $this->belongsTo('\App\UserRole', 'role_id', 'role_id');
     }
     public function addNew($input)
-
     {
-
-        $check = static::where('google_id',$input['google_id'])->first();
-
+        $check = static::where('google_id', $input['google_id'])->first();
 
 
-        if(is_null($check)){
 
+        if (is_null($check)) {
             return static::create($input);
-
         }
 
 
 
         return $check;
-
     }
 }

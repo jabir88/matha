@@ -6,9 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Shipping;
-use App\Order;
-use App\User;
 
 class OrderShipped extends Mailable
 {
@@ -21,14 +18,11 @@ class OrderShipped extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user ,Shipping $ship_details ,Order $order_details)
+    public function __construct($user, $ship_details, $order_details)
     {
-
-
-
-              $this->user=$user;
-            $this->ship_details=$ship_details;
-            $this->order_details=$order_details;
+        $this->user=$user;
+        $this->ship_details=$ship_details;
+        $this->order_details=$order_details;
     }
 
     /**
@@ -38,6 +32,6 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.orders',['user'=>$this->user,'ship_details'=>$this->ship_details,'order_details'=>$this->order_details]);
+        return $this->markdown('emails.orders', ['user'=>$this->user,'ship_details'=>$this->ship_details,'order_details'=>$this->order_details]);
     }
 }
